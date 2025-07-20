@@ -14,6 +14,7 @@ type Movie struct {
 	ID       string    `json:"id"`
 	Isbn     string    `json:"isbn"`
 	Title    string    `json:"title"`
+	Image    string    `json:"image"`
 	Director *Director `json:"director"`
 }
 
@@ -80,12 +81,12 @@ func deleteMovie(w http.ResponseWriter, r *http.Request) {
 func main() {
 	r := mux.NewRouter()
 
-	movies = append(movies, Movie{ID: "1", Isbn: "1111", Title: "Inception", Director: &Director{Firstname: "Christopher", Lastname: "Nolan"}})
-	movies = append(movies, Movie{ID: "2", Isbn: "1211", Title: "The Godfather", Director: &Director{Firstname: "Francis", Lastname: "Coppola"}})
-	movies = append(movies, Movie{ID: "3", Isbn: "1311", Title: "Interstellar", Director: &Director{Firstname: "Christopher", Lastname: "Nolan"}})
-	movies = append(movies, Movie{ID: "4", Isbn: "1411", Title: "Parasite", Director: &Director{Firstname: "Bong", Lastname: "Joon-ho"}})
-	movies = append(movies, Movie{ID: "5", Isbn: "1511", Title: "The Dark Knight", Director: &Director{Firstname: "Christopher", Lastname: "Nolan"}})
-	movies = append(movies, Movie{ID: "6", Isbn: "1611", Title: "Pulp Fiction", Director: &Director{Firstname: "Quentin", Lastname: "Tarantino"}})
+	movies = append(movies, Movie{ ID: "1", Isbn: "1111", Title: "Baahubali", Image: "https://i.ibb.co/ZRyD4qdK/baahubali.jpg", Director: &Director{ Firstname: "S. S.",Lastname: "Rajamouli"}})
+    movies = append(movies, Movie{ID: "2", Isbn: "1211", Title: "3 Idiots", Image: "https://i.ibb.co/srk36ts/3Idiots.jpg", Director: &Director{	Firstname: "Rajkumar", Lastname: "Hirani"}})
+    movies = append(movies, Movie{ID: "3", Isbn: "1311", Title: "Avengers",	Image: "https://i.ibb.co/VY6VZjYk/avengers.jpg", Director: &Director{ Firstname: "Anthony",	Lastname: "Russo"}})
+	movies = append(movies, Movie{ID: "4", Isbn: "1411", Title: "Spider-Man", Image: "https://i.ibb.co/SXWV7j6V/spider.jpg", Director: &Director{ Firstname: "Jon",	Lastname: "Watts"}})
+	movies = append(movies, Movie{ID: "5", Isbn: "1511", Title: "Squid Game", Image: "https://i.ibb.co/p60Mt3x6/squid-game.jpg", Director: &Director{ Firstname: "Hwang", Lastname: "Dong-hyuk"}})
+	movies = append(movies, Movie{ID: "6", Isbn: "1611", Title: "Hera Pheri", Image: "https://i.ibb.co/6RBNqDTn/hera-pheri.jpg", Director: &Director{ Firstname: "Priyadarshan", Lastname: "Tarantino"}})
 
 	r.HandleFunc("/movies", getMovies).Methods("GET")
 	r.HandleFunc("/movies/{id}", getMovie).Methods("GET")
@@ -95,7 +96,7 @@ func main() {
 
 	// CORS Middleware
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:5173"}, // Allow your frontend origin
+		AllowedOrigins:   []string{"http://localhost:5173"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Content-Type"},
 		AllowCredentials: true,
@@ -105,5 +106,4 @@ func main() {
 
 	fmt.Println("Server started at :8080")
 	log.Fatal(http.ListenAndServe(":8080", handler))
-
 }
