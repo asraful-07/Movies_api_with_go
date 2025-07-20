@@ -15,6 +15,7 @@ type Movie struct {
 	Isbn     string    `json:"isbn"`
 	Title    string    `json:"title"`
 	Image    string    `json:"image"`
+	Description string  `json:"description"`
 	Director *Director `json:"director"`
 }
 
@@ -81,12 +82,12 @@ func deleteMovie(w http.ResponseWriter, r *http.Request) {
 func main() {
 	r := mux.NewRouter()
 
-	movies = append(movies, Movie{ ID: "1", Isbn: "1111", Title: "Baahubali", Image: "https://i.ibb.co/ZRyD4qdK/baahubali.jpg", Director: &Director{ Firstname: "S. S.",Lastname: "Rajamouli"}})
-    movies = append(movies, Movie{ID: "2", Isbn: "1211", Title: "3 Idiots", Image: "https://i.ibb.co/srk36ts/3Idiots.jpg", Director: &Director{	Firstname: "Rajkumar", Lastname: "Hirani"}})
-    movies = append(movies, Movie{ID: "3", Isbn: "1311", Title: "Avengers",	Image: "https://i.ibb.co/VY6VZjYk/avengers.jpg", Director: &Director{ Firstname: "Anthony",	Lastname: "Russo"}})
-	movies = append(movies, Movie{ID: "4", Isbn: "1411", Title: "Spider-Man", Image: "https://i.ibb.co/SXWV7j6V/spider.jpg", Director: &Director{ Firstname: "Jon",	Lastname: "Watts"}})
-	movies = append(movies, Movie{ID: "5", Isbn: "1511", Title: "Squid Game", Image: "https://i.ibb.co/p60Mt3x6/squid-game.jpg", Director: &Director{ Firstname: "Hwang", Lastname: "Dong-hyuk"}})
-	movies = append(movies, Movie{ID: "6", Isbn: "1611", Title: "Hera Pheri", Image: "https://i.ibb.co/6RBNqDTn/hera-pheri.jpg", Director: &Director{ Firstname: "Priyadarshan", Lastname: "Tarantino"}})
+	movies = append(movies, Movie{ ID: "1", Isbn: "1111", Title: "Baahubali", Image: "https://i.ibb.co/ZRyD4qdK/baahubali.jpg", Description:"In the ancient kingdom of Mahishmati, a young man named Shivudu discovers his royal lineage and rises to challenge the tyrant who wronged his family. An epic saga of courage, betrayal, and destiny.", Director: &Director{ Firstname: "S. S.",Lastname: "Rajamouli"}})
+    movies = append(movies, Movie{ ID: "2", Isbn: "1211", Title: "3 Idiots", Image: "https://i.ibb.co/srk36ts/3Idiots.jpg", Description: "Three engineering students navigate their way through the pressures of an unforgiving academic system while discovering the true meaning of friendship, education, and chasing dreams.", Director: &Director{	Firstname: "Rajkumar", Lastname: "Hirani"}})
+    movies = append(movies, Movie{ ID: "3", Isbn: "1311", Title: "Avengers", Image: "https://i.ibb.co/VY6VZjYk/avengers.jpg", Description:"When global peace is threatened by Loki and his alien army, Earth's mightiest heroes Iron Man, Thor, Captain America, Hulk, Black Widow, and Hawkeye must unite to defend the planet in an explosive battle for humanity.", Director: &Director{ Firstname: "Anthony", Lastname: "Russo"}})
+	movies = append(movies, Movie{ ID: "4", Isbn: "1411", Title: "Spider-Man", Image: "https://i.ibb.co/SXWV7j6V/spider.jpg", Description: "After being bitten by a radioactive spider, teenager Peter Parker gains spider-like powers and must balance his personal life with his responsibilities as Spider-Man to protect New York from formidable villains.", Director: &Director{ Firstname: "Jon",	Lastname: "Watts"}})
+	movies = append(movies, Movie{ID: "5", Isbn: "1511", Title: "Squid Game", Image: "https://i.ibb.co/p60Mt3x6/squid-game.jpg", Description: "Struggling financially, hundreds of players accept a mysterious invitation to compete in deadly children's games. The prize? Billions of won. The cost? Their lives. A chilling survival drama that explores human desperation.", Director: &Director{ Firstname: "Hwang", Lastname: "Dong-hyuk"}})
+	movies = append(movies, Movie{ID: "6", Isbn: "1611", Title: "Hera Pheri", Image: "https://i.ibb.co/6RBNqDTn/hera-pheri.jpg", Description: "A hilarious rollercoaster of misadventures follows three broke men — a landlord, a tenant, and an out-of-work man — who accidentally become part of a kidnapping plot, leading to laugh-out-loud chaos and confusion.", Director: &Director{ Firstname: "Priyadarshan", Lastname: "Tarantino"}})
 
 	r.HandleFunc("/movies", getMovies).Methods("GET")
 	r.HandleFunc("/movies/{id}", getMovie).Methods("GET")
