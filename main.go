@@ -26,11 +26,22 @@ type Director struct {
 
 var movies []Movie
 
+// create a movie data
+func createMovie(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	var movie Movie
+	_ = json.NewDecoder(r.Body).Decode(&movie)
+	movies = append(movies, movie)
+	json.NewEncoder(w).Encode(movie)
+}
+
+// get a movie data
 func getMovies(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(movies)
 }
 
+// single movie data
 func getMovie(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
@@ -43,14 +54,7 @@ func getMovie(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode("Movie not found")
 }
 
-func createMovie(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	var movie Movie
-	_ = json.NewDecoder(r.Body).Decode(&movie)
-	movies = append(movies, movie)
-	json.NewEncoder(w).Encode(movie)
-}
-
+// update movie data
 func updateMovie(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
@@ -67,6 +71,7 @@ func updateMovie(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// delete / remove movie data
 func deleteMovie(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
