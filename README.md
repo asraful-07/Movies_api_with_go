@@ -29,3 +29,33 @@ Welcome to the backend of **CineSpot** – a movie platform API built with **Nod
 ---
 
 ## 📁 Project Structure
+
+---
+
+## 🔗 API Endpoints
+
+| Method | Endpoint        | Description              |
+| ------ | --------------- | ------------------------ |
+| GET    | /api/movies     | Get all movies           |
+| GET    | /api/movies/:id | Get a movie by ID        |
+| POST   | /api/movies     | Create a new movie       |
+| PUT    | /api/movies/:id | Update an existing movie |
+| DELETE | /api/movies/:id | Delete a movie by ID     |
+
+---
+
+## 📦 Installation & Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/cinespot-backend.git
+
+# Navigate into the project
+cd cinespot-backend
+
+# Install dependencies
+npm install
+
+# Run the server
+npm run dev
+```
